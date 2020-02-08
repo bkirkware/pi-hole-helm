@@ -3,6 +3,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ include "pi-hole.fullname" . }}-dnsmasq
+  namespace: pi-hole
   labels:
     app.kubernetes.io/name: {{ include "pi-hole.name" . }}
     helm.sh/chart: {{ include "pi-hole.chart" . }}
@@ -10,7 +11,7 @@ metadata:
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
   accessModes:
-  - ReadWriteMany
+  - ReadWriteOnce
   resources:
     requests:
       storage: {{ .Values.persistence.dnsmasq.size | quote }}
@@ -24,6 +25,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ include "pi-hole.fullname" . }}-data
+  namespace: pi-hole
   labels:
     app.kubernetes.io/name: {{ include "pi-hole.name" . }}
     helm.sh/chart: {{ include "pi-hole.chart" . }}
@@ -31,7 +33,7 @@ metadata:
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
   accessModes:
-  - ReadWriteMany
+  - ReadWriteOnce
   resources:
     requests:
       storage: {{ .Values.persistence.data.size | quote }}
