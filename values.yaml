@@ -2,7 +2,7 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 1
+replicaCount: 2
 
 image:
   repository: pihole/pihole
@@ -58,7 +58,7 @@ persistence:
     # Optionally specify a storage class to be used for the pihole data directory.
     # If not specified and claimName is not specified, the default storage
     # class will be used.
-    storageClass: ""
+    storageClass: "kubernetes-storage-policy"
     # subPath: some-subpath
     # The requested size of the volume to be used when creating a
     # PersistentVolumeClaim.
@@ -71,7 +71,7 @@ persistence:
     # Optionally specify a storage class to be used for the dnsmasq.d directory.
     # If not specified and claimName is not specified, the default storage
     # class will be used.
-    storageClass: ""
+    storageClass: "kubernetes-storage-policy"
     # subPath: some-subpath
     # The requested size of the volume to be used when creating a
     # PersistentVolumeClaim.
@@ -82,9 +82,9 @@ pihole:
   # by default is set randomly, look at logs to get password
   password: 
   # primary upstream DNS provider
-  dns1: 8.8.8.8
+  dns1: 1.1.1.1
   # secondary upstream DNS provider
-  dns2: 8.8.4.4
+  dns2: 1.0.0.1
   # `local` listens on all local subnets, `all` permits listening on internet origin subnets in addition to local.
   listening: all
   # expose dhcp functionality
